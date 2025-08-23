@@ -1,15 +1,21 @@
 entrypoint = "main.py"
-modules = ["python-3.11"]
 
-[nix]
-channel = "stable-25_05"
+run = """
+python3 -m pip install --user -q --upgrade pip
+python3 -m pip install --user -q -r requirements.txt
+export PYTHONPATH=$(python3 -c 'import site; print(site.getusersitepackages())')
+exec python3 main.py
+"""
 
-[unitTest]
-language = "python3"
+[[ports]]
+localPort = 3000
+externalPort = 80
 
-[gitHubImport]
-requiredFiles = [".replit", "replit.nix"]
+[[ports]]
+localPort = 8080
+externalPort = 8080
 
 [deployment]
-run = ["python3", "main.py"]
+build = ["sh", "-c", "pip install --user -r requirements.txt"]
+run = ["sh", "-c", "python3 main.py"]
 deploymentTarget = "cloudrun"
