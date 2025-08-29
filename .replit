@@ -1,8 +1,9 @@
+
 entrypoint = "main.py"
-run = "python3 main.py"
+run = "python main.py"
 
 [deployment]
-build = ["sh", "-c", "python -m pip install ."]
+build = ["sh", "-c", "pip install ."]
 run = ["sh", "-c", "gunicorn -w 1 -k sync -b 0.0.0.0:$PORT main:app"]
 deploymentTarget = "cloudrun"
 
@@ -16,14 +17,10 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python3 main.py"
+args = "python main.py"
 
 [nix]
 channel = "stable-24_05"
-
-[nix.packages]
-python = "python311"
-pip = "python311Packages.pip"
 
 [env]
 PYTHONPATH = "$REPL_HOME"
