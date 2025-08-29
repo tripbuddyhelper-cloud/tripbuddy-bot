@@ -1,5 +1,6 @@
+
 entrypoint = "main.py"
-run = "python3 main.py"
+run = "python main.py"
 
 [deployment]
 build = ["sh", "-c", "pip install ."]
@@ -17,3 +18,9 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+PYTHONPATH = "$REPL_HOME"
