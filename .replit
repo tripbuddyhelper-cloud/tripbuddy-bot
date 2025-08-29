@@ -2,6 +2,18 @@ entrypoint = "main.py"
 run = "python3 main.py"
 
 [deployment]
-build = ["sh", "-c", "uv pip install -r pyproject.toml --python python3"]
+build = ["sh", "-c", "pip install Flask==3.0.3 pyTelegramBotAPI==4.28.0 gunicorn==21.2.0"]
 run = ["sh", "-c", "gunicorn -w 1 -k sync -b 0.0.0.0:$PORT main:app"]
 deploymentTarget = "cloudrun"
+
+[workflows]
+runButton = "Run Bot"
+
+[[workflows.workflow]]
+name = "Run Bot"
+author = 46533849
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
