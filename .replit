@@ -2,7 +2,7 @@ entrypoint = "main.py"
 run = "python3 main.py"
 
 [deployment]
-build = ["sh", "-c", "pip install Flask==3.0.3 pyTelegramBotAPI==4.28.0 gunicorn==21.2.0"]
+build = ["sh", "-c", "pip install ."]
 run = ["sh", "-c", "gunicorn -w 1 -k sync -b 0.0.0.0:$PORT main:app"]
 deploymentTarget = "cloudrun"
 
