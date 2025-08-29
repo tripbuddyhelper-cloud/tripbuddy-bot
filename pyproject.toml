@@ -1,7 +1,13 @@
 [project]
-name = "python-template"
+name = "tripbuddy"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
 requires-python = ">=3.11"
-dependencies = []
+
+dependencies = [
+  "Flask==3.0.3",
+  "pyTelegramBotAPI==4.28.0",
+  "gunicorn==21.2.0",
+]
+
+[tool.uv]
+# uv — менеджер зависимостей, который использует Replit Autoscale

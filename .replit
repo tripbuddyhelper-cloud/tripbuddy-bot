@@ -1,21 +1,6 @@
 entrypoint = "main.py"
-
-run = """
-python3 -m pip install --user -q --upgrade pip
-python3 -m pip install --user -q -r requirements.txt
-export PYTHONPATH=$(python3 -c 'import site; print(site.getusersitepackages())')
-exec python3 main.py
-"""
-
-[[ports]]
-localPort = 3000
-externalPort = 80
-
-[[ports]]
-localPort = 8080
-externalPort = 8080
+run = "python3 main.py"
 
 [deployment]
-build = ["sh", "-c", "pip install --user -r requirements.txt"]
-run = ["sh", "-c", "python3 main.py"]
+run = ["sh", "-c", "gunicorn -w 1 -k sync -b 0.0.0.0:$PORT main:app"]
 deploymentTarget = "cloudrun"
