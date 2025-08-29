@@ -17,10 +17,13 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python main.py"
+args = "python3 main.py"
 
 [nix]
 channel = "stable-24_05"
+
+[nix.packages]
+python3 = "python3"
 
 [env]
 PYTHONPATH = "$REPL_HOME"
