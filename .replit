@@ -1,0 +1,10 @@
+entrypoint = "main.py"
+
+[run]
+command = "sh -c 'python3 -m gunicorn -w 1 -k sync -b 0.0.0.0:$PORT main:app'"
+
+[build]
+command = "pip3 install -r requirements.txt"
+
+[packages]
+python = "3.11.9"
